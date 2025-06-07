@@ -1,0 +1,132 @@
+/* ============================= 
+    Стили для шапки (header) 
+   ============================= */
+
+   .header {
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+    position: sticky;
+    top: 0;
+    padding: 0;
+    background: transparent !important; /* Убираем фон */
+    backdrop-filter: blur(8px); /* Добавляем легкое размытие для читаемости */
+}
+
+/* Убираем темный фон шапки */
+header.text-bg-dark {
+    background-color: transparent !important;
+    color: inherit !important;
+}
+
+/* Делаем ссылки в шапке белыми с полупрозрачностью */
+.header .nav-link {
+    color: rgba(255, 255, 255, 0.9) !important;
+    transition: color 0.2s ease;
+    text-decoration: none; /* Убираем подчеркивание по умолчанию */
+}
+
+/* Ссылка при наведении */
+.header .nav-link:hover {
+    color: #fff !important;
+}
+
+/* Контейнер в шапке: на всю ширину без отступов */
+.header .container {
+    max-width: 100%;
+    padding-left: 0;
+    padding-right: 0;
+    margin: 0 auto;
+}
+
+/* Аватарка/иконка в шапке */
+.header__img {
+    display: block;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;     
+    object-fit: cover;      
+}
+
+.header::after {
+    content: "";
+    display: block;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.1);
+    width: 100%;
+}
+
+/* Стиль для активной ссылки */
+.header .nav-link.active {
+    color: #fff !important;
+    font-weight: 500;
+    position: relative;
+    text-decoration: none; /* Убираем подчеркивание для активной ссылки */
+}
+
+/* Псевдоэлемент подчеркивания для активной ссылки */
+.header .nav-link.active::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60%;
+    height: 2px;
+    background-color: #fff;
+    border-radius: 2px;
+}
+
+/* Общие стили для nav-link */
+.header .nav-link {
+    padding: 0.5rem 1rem;
+    font-size: 1.05rem;
+}
+
+/* Стиль для кнопки с контуром */
+.header .btn-outline-light {
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+.header .btn-outline-light:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Стиль для отключенной ссылки */
+.nav-link.disabled {
+    pointer-events: auto;
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* Стиль для всплывающей подсказки */
+.custom-tooltip-trigger {
+    position: relative;
+    pointer-events: none; /* отключаем клики */
+    cursor: not-allowed;
+}
+
+.custom-tooltip {
+    display: none;
+    position: absolute;
+    top: 120%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #111;
+    color: #fff;
+    padding: 12px 16px;
+    border: 1px solid #ff5c00;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-align: center;
+    white-space: nowrap;
+    z-index: 10;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    text-transform: uppercase;
+    line-height: 1.5;
+    pointer-events: none;
+}
+
+/* Показывать подсказку при наведении */
+.custom-tooltip-trigger:hover .custom-tooltip {
+    display: block;
+}

@@ -1,0 +1,183 @@
+{% extends 'main/base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1 class="mb-4">Конфигуратор ПК</h1>
+    
+    <form id="configurator-form">
+        <!-- 1. Выбор игры -->
+        <div class="card mb-4">
+            <div class="card-header bg-dark text-white">
+                <h5 class="mb-0">1. Выберите игру</h5>
+            </div>
+            <div class="card-body">
+                <select class="form-select" id="game-select">
+                    <option selected disabled>Выберите игру...</option>
+                    <option value="cyberpunk">Cyberpunk 2077</option>
+                    <option value="rdr2">Red Dead Redemption 2</option>
+                    <option value="w3">The Witcher 3</option>
+                    <option value="msfs">Microsoft Flight Simulator</option>
+                    <option value="horizon">Horizon Zero Dawn</option>
+                    <option value="cod">Call of Duty: Warzone</option>
+                    <option value="fortnite">Fortnite</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- 2. Желаемый FPS -->
+        <div class="card mb-4">
+            <div class="card-header bg-dark text-white">
+                <h5 class="mb-0">2. Желаемый FPS</h5>
+            </div>
+            <div class="card-body">
+                <div class="form-group">
+                    <label for="fps-range" class="form-label">Целевой FPS: <span id="fps-value">60</span></label>
+                    <input type="range" class="form-range" min="30" max="240" step="10" id="fps-range" value="60">
+                    <div class="d-flex justify-content-between">
+                        <small>30 FPS</small>
+                        <small>60 FPS</small>
+                        <small>120 FPS</small>
+                        <small>240 FPS</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 3. Настройки графики -->
+        <div class="card mb-4">
+            <div class="card-header bg-dark text-white">
+                <h5 class="mb-0">3. Настройки графики</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">Качество графики</label>
+                        <select class="form-select">
+                            <option>Низкое</option>
+                            <option selected>Среднее</option>
+                            <option>Высокое</option>
+                            <option>Ультра</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">DLSS/FSR</label>
+                        <select class="form-select">
+                            <option value="off">Выкл</option>
+                            <option value="quality">Качество</option>
+                            <option value="balanced">Сбалансированный</option>
+                            <option value="performance">Производительность</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">Сглаживание</label>
+                        <select class="form-select">
+                            <option>Выкл</option>
+                            <option selected>FXAA</option>
+                            <option>TAA</option>
+                            <option>MSAA 2x</option>
+                            <option>MSAA 4x</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">Трассировка лучей</label>
+                        <select class="form-select">
+                            <option selected>Выкл</option>
+                            <option>Средняя</option>
+                            <option>Высокая</option>
+                            <option>Ультра</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 4. Бюджет -->
+        <div class="card mb-4">
+            <div class="card-header bg-dark text-white">
+                <h5 class="mb-0">4. Бюджет (руб)</h5>
+            </div>
+            <div class="card-body">
+                <div class="input-group mb-3">
+                    <span class="input-group-text">₽</span>
+                    <input type="number" class="form-control" placeholder="50000" id="budget">
+                    <button class="btn btn-outline-secondary" type="button" id="budget-preset-1">50к</button>
+                    <button class="btn btn-outline-secondary" type="button" id="budget-preset-2">100к</button>
+                    <button class="btn btn-outline-secondary" type="button" id="budget-preset-3">150к</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 5. Желаемые комплектующие -->
+        <div class="card mb-4">
+            <div class="card-header bg-dark text-white">
+                <h5 class="mb-0">5. Желаемые комплектующие</h5>
+            </div>
+            <div class="card-body">
+                <div class="mb-3">
+                    <label class="form-label">Видеокарта</label>
+                    <input type="text" class="form-control component-search" placeholder="Начните вводить..." data-component="gpu">
+                    <div class="dropdown-menu" id="gpu-dropdown">
+                        <a class="dropdown-item" href="#">RTX 4090</a>
+                        <a class="dropdown-item" href="#">RTX 4080</a>
+                        <a class="dropdown-item" href="#">RX 7900 XTX</a>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Процессор</label>
+                    <input type="text" class="form-control component-search" placeholder="Начните вводить..." data-component="cpu">
+                    <div class="dropdown-menu" id="cpu-dropdown">
+                        <a class="dropdown-item" href="#">Intel i9-13900K</a>
+                        <a class="dropdown-item" href="#">AMD Ryzen 9 7950X</a>
+                    </div>
+                </div>
+                <!-- Можно добавить другие компоненты по аналогии -->
+                <button class="btn btn-outline-secondary" type="button" id="add-component">+ Добавить компонент</button>
+            </div>
+        </div>
+
+        <div class="d-grid gap-2">
+            <button class="btn btn-primary btn-lg" type="submit">Подобрать конфигурацию</button>
+        </div>
+    </form>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    // Обновление значения FPS при движении ползунка
+    document.getElementById('fps-range').addEventListener('input', function() {
+        document.getElementById('fps-value').textContent = this.value;
+    });
+
+    // Пресеты бюджета
+    document.querySelectorAll('[id^=budget-preset-]').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const budget = this.textContent.replace('к', '000');
+            document.getElementById('budget').value = budget;
+        });
+    });
+
+    // Заглушка для поиска компонентов
+    document.querySelectorAll('.component-search').forEach(input => {
+        input.addEventListener('input', function() {
+            const dropdownId = this.dataset.component + '-dropdown';
+            const dropdown = document.getElementById(dropdownId);
+            
+            if (this.value.length > 1) {
+                dropdown.style.display = 'block';
+            } else {
+                dropdown.style.display = 'none';
+            }
+        });
+    });
+
+    // Закрытие dropdown при клике вне его
+    document.addEventListener('click', function(e) {
+        if (!e.target.classList.contains('component-search')) {
+            document.querySelectorAll('.dropdown-menu').forEach(dropdown => {
+                dropdown.style.display = 'none';
+            });
+        }
+    });
+</script>
+{% endblock %}
